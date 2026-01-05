@@ -8,7 +8,8 @@ import {
   Play, Pause, Clock, FileCheck, AlertCircle, AlertTriangle,
   ChevronRight, MessageSquare, FileSignature, Calendar, Filter,
   ArrowRight, LogIn, Power, Coffee, UserX, Download, ChevronDown,
-  PieChart, TrendingUp, BarChart3, FileBadge, Image
+  PieChart, TrendingUp, BarChart3, FileBadge, Image,
+  Bell, Volume2, Wifi, Cpu, Zap, Activity, HelpCircle, Globe, Moon
 } from 'lucide-react';
 
 export const Icons = {
@@ -60,5 +61,14 @@ export const Icons = {
   TrendingUp,
   BarChart: BarChart3,
   FileBadge,
-  Image
+  Image,
+  Bell,
+  Volume2,
+  Wifi,
+  Cpu,
+  Zap,
+  Activity,
+  HelpCircle,
+  Globe,
+  Moon
 };
