@@ -9,7 +9,8 @@ import {
   ChevronRight, MessageSquare, FileSignature, Calendar, Filter,
   ArrowRight, LogIn, Power, Coffee, UserX, Download, ChevronDown,
   PieChart, TrendingUp, BarChart3, FileBadge, Image,
-  Bell, Volume2, Wifi, Cpu, Zap, Activity, HelpCircle, Globe, Moon
+  Bell, Volume2, Wifi, Cpu, Zap, Activity, HelpCircle, Globe, Moon,
+  Star, Edit, Info
 } from 'lucide-react';
 
 export const Icons = {
@@ -70,5 +71,8 @@ export const Icons = {
   Activity,
   HelpCircle,
   Globe,
-  Moon
+  Moon,
+  Star,
+  Edit,
+  Info
 };

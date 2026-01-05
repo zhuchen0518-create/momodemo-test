@@ -10,7 +10,8 @@ export enum TabView {
   AI_TOOLS = 'AI_TOOLS',
   LOCATION = 'LOCATION',
   TRANSCRIPT = 'TRANSCRIPT',
-  HISTORY = 'HISTORY'
+  HISTORY = 'HISTORY',
+  NOTES = 'NOTES'
 }
 
 export interface Customer {

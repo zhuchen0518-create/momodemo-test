@@ -264,6 +264,20 @@ export const CallDetails: React.FC<CallDetailsProps> = ({ callId, onBack }) => {
                         </div>
                       </div>
                    </div>
+
+                   {/* 4. Remarks (New) */}
+                   <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+                      <h3 className="font-bold text-slate-800 mb-4 flex items-center text-sm">
+                        <Icons.Edit className="w-4 h-4 mr-2 text-brand-500" />
+                        通话备注
+                      </h3>
+                      <div className="bg-amber-50 p-4 rounded-lg border border-amber-100 text-sm text-slate-700 leading-relaxed">
+                         客户对德助AX车型非常感兴趣，已确认贷款细节。但在首付比例上稍微有些犹豫，建议后续跟进时重点介绍我们的低首付优惠政策。已预约下周二进行线下签约。
+                      </div>
+                      <div className="flex justify-end mt-2">
+                        <span className="text-xs text-slate-400">最后编辑：杨怀 (2023-10-24 15:18:05)</span>
+                      </div>
+                   </div>
                 </div>
              )}
              

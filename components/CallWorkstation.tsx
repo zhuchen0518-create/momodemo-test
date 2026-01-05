@@ -20,6 +20,7 @@ export const CallWorkstation: React.FC<CallWorkstationProps> = ({
   const [isMuted, setIsMuted] = useState(false);
   const [isCameraOff, setIsCameraOff] = useState(false);
   const [callDuration, setCallDuration] = useState(0);
+  const [remark, setRemark] = useState('');
   
   // Verification States
   const [idScanned, setIdScanned] = useState(false);
@@ -221,6 +222,7 @@ export const CallWorkstation: React.FC<CallWorkstationProps> = ({
           {[
             { id: TabView.AI_TOOLS, label: '智能核验', icon: Icons.UserCheck },
             { id: TabView.TRANSCRIPT, label: '话术辅助', icon: Icons.FileText },
+            { id: TabView.NOTES, label: '备注', icon: Icons.Edit },
             { id: TabView.LOCATION, label: '位置信息', icon: Icons.Location },
           ].map(tab => (
             <button
@@ -233,15 +235,15 @@ export const CallWorkstation: React.FC<CallWorkstationProps> = ({
               }`}
             >
               <tab.icon className={`w-4 h-4 ${activeTab === tab.id ? 'stroke-[2.5px]' : ''}`} />
-              <span>{tab.label}</span>
+              <span className="hidden xl:inline">{tab.label}</span>
             </button>
           ))}
         </div>
 
         {/* Tab Content */}
-        <div className="flex-1 overflow-y-auto p-5 bg-slate-50/30 custom-scrollbar">
+        <div className="flex-1 overflow-y-auto bg-slate-50/30 custom-scrollbar relative">
            {activeTab === TabView.AI_TOOLS && (
-             <div className="space-y-6">
+             <div className="space-y-6 p-5">
                 
                 {/* Step 1: ID Card */}
                 <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm transition-all hover:shadow-md">
@@ -364,7 +366,7 @@ export const CallWorkstation: React.FC<CallWorkstationProps> = ({
            )}
 
            {activeTab === TabView.TRANSCRIPT && (
-             <div className="space-y-4">
+             <div className="space-y-4 p-5">
                 <div className="flex items-center justify-center my-4">
                   <span className="text-xs text-slate-400 bg-slate-100 px-3 py-1 rounded-full">通话开始于 15:06:22</span>
                 </div>
@@ -405,8 +407,45 @@ export const CallWorkstation: React.FC<CallWorkstationProps> = ({
              </div>
            )}
            
+           {activeTab === TabView.NOTES && (
+             <div className="flex flex-col h-full p-5 space-y-4">
+                <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex-1 flex flex-col">
+                   <div className="flex items-center justify-between mb-3">
+                      <h4 className="font-semibold text-slate-800 flex items-center text-sm">
+                        <Icons.Edit className="w-4 h-4 mr-2 text-brand-600" />
+                        业务备注记录
+                      </h4>
+                      <span className="text-xs text-slate-400">自动保存</span>
+                   </div>
+                   <textarea 
+                     className="flex-1 w-full p-3 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 resize-none leading-relaxed"
+                     placeholder="在此记录通话重点、客户诉求或后续跟进事项..."
+                     value={remark}
+                     onChange={(e) => setRemark(e.target.value)}
+                   ></textarea>
+                </div>
+
+                <div className="bg-brand-50/50 p-4 rounded-xl border border-brand-100/50">
+                   <h5 className="text-brand-800 font-semibold text-xs flex items-center mb-3">
+                     <Icons.Info className="w-3.5 h-3.5 mr-1.5" /> 快捷标签 (点击添加)
+                   </h5>
+                   <div className="flex flex-wrap gap-2">
+                      {['客户意向高', '需人工回访', '资料待补全', '异议处理', '投诉预警', '预约面签'].map((tag) => (
+                        <button 
+                          key={tag}
+                          onClick={() => setRemark(prev => (prev ? prev + '，' : '') + tag)}
+                          className="px-2.5 py-1.5 bg-white text-brand-700 text-xs border border-brand-200/60 rounded hover:bg-brand-50 transition-colors shadow-sm"
+                        >
+                          + {tag}
+                        </button>
+                      ))}
+                   </div>
+                </div>
+             </div>
+           )}
+
            {activeTab === TabView.LOCATION && (
-             <div className="space-y-4">
+             <div className="space-y-4 p-5">
                <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden relative group">
                   <div className="h-40 bg-slate-100 flex items-center justify-center text-slate-400 bg-[url('https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/118.7969,32.0603,12,0/600x400?access_token=PLACEHOLDER')] bg-cover bg-center">
                     <div className="bg-brand-600 text-white p-1.5 rounded-full shadow-lg ring-4 ring-white/50 animate-bounce">

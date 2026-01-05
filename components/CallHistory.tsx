@@ -22,6 +22,7 @@ const historyData = [
     answerTime: '2025-12-01 15:21:51',
     endTime: '2025-12-01 15:23:45',
     duration: '01分54秒',
+    score: 98,
   },
   {
     id: 'seataae123b...',
@@ -36,6 +37,7 @@ const historyData = [
     answerTime: '2025-12-01 15:15:22',
     endTime: '2025-12-01 15:17:12',
     duration: '01分50秒',
+    score: 95,
   },
   {
     id: 'seataa03cc5...',
@@ -50,6 +52,7 @@ const historyData = [
     answerTime: '2025-12-01 15:06:15',
     endTime: '2025-12-01 15:08:22',
     duration: '02分07秒',
+    score: 55, // Low score example
   },
   {
     id: 'seataa6b63...',
@@ -64,6 +67,7 @@ const historyData = [
     answerTime: '2025-12-01 14:56:45',
     endTime: '2025-12-01 14:58:10',
     duration: '01分25秒',
+    score: 88,
   },
   {
     id: 'seataa3ab9f...',
@@ -78,6 +82,7 @@ const historyData = [
     answerTime: '2025-12-01 14:47:20',
     endTime: '2025-12-01 14:54:11',
     duration: '06分51秒',
+    score: 92,
   },
   {
     id: 'seataa19a1e...',
@@ -92,6 +97,7 @@ const historyData = [
     answerTime: '2025-12-01 14:45:10',
     endTime: '2025-12-01 14:47:05',
     duration: '01分55秒',
+    score: 59, // Low score example
   },
   {
     id: 'seataac4518...',
@@ -106,6 +112,7 @@ const historyData = [
     answerTime: '2025-12-01 14:44:15',
     endTime: '2025-12-01 14:44:55',
     duration: '00分40秒',
+    score: 85,
   },
   {
     id: 'seataa2ed18...',
@@ -120,6 +127,7 @@ const historyData = [
     answerTime: '-',
     endTime: '2025-12-01 14:42:30',
     duration: '-',
+    score: 0,
   },
   {
     id: 'seataa361bc...',
@@ -134,6 +142,7 @@ const historyData = [
     answerTime: '-',
     endTime: '2025-12-01 14:42:00',
     duration: '-',
+    score: 0,
   },
 ];
 
@@ -207,7 +216,7 @@ export const CallHistory: React.FC<CallHistoryProps> = ({ onBack, onViewDetails 
               {[
                 '视频会话ID', '坐席名称', '坐席账号', '客户手机号', 
                 '接听状态', '呼叫类型', '外显号码', '通话类型', 
-                '开始时间', '接听时间', '结束时间', '通话时长', '操作'
+                '开始时间', '接听时间', '结束时间', '通话时长', '服务得分', '操作'
               ].map((header) => (
                 <th key={header} className="px-4 py-4 text-xs font-semibold text-slate-500 border-b border-slate-200 whitespace-nowrap">
                   {header}
@@ -237,6 +246,27 @@ export const CallHistory: React.FC<CallHistoryProps> = ({ onBack, onViewDetails 
                 <td className="px-4 py-3 text-xs text-slate-500 font-mono">{row.answerTime}</td>
                 <td className="px-4 py-3 text-xs text-slate-500 font-mono">{row.endTime}</td>
                 <td className="px-4 py-3 text-sm text-slate-800 font-mono">{row.duration}</td>
+                <td className="px-4 py-3">
+                   {/* Score Rendering Logic */}
+                   {row.status !== '已接听' ? (
+                      <span className="text-slate-300 ml-2">-</span>
+                   ) : row.score < 60 ? (
+                      // LOW SCORE: Solid Red, High Contrast, No Text Label
+                      <span className="inline-flex items-center justify-center px-3 py-1 rounded-full bg-red-600 text-white text-sm font-bold shadow-md shadow-red-200 ring-2 ring-red-100 animate-pulse">
+                         <Icons.AlertTriangle className="w-3.5 h-3.5 mr-1.5 fill-white text-red-600" />
+                         {row.score}
+                      </span>
+                   ) : row.score < 90 ? (
+                      // MEDIUM SCORE: Orange Text, No Label
+                      <span className="font-bold text-amber-600 font-mono text-base pl-2">{row.score}</span>
+                   ) : (
+                      // HIGH SCORE: Green Text & Star
+                      <div className="flex items-center">
+                         <span className="font-bold text-emerald-600 font-mono text-base pl-2">{row.score}</span>
+                         <Icons.Star className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400 ml-1.5 drop-shadow-sm" />
+                      </div>
+                   )}
+                </td>
                 <td className="px-4 py-3 text-sm">
                    <div className="flex items-center space-x-3">
                       <button 
