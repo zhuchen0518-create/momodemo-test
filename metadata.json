@@ -1,0 +1,8 @@
+{
+  "name": "Copy of 5G 智能视频坐席",
+  "description": "企业级5G视频银行与身份核验平台",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
